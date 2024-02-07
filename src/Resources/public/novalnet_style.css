@@ -1,0 +1,28 @@
+.nn-history-list{
+    list-style-type:none;
+    padding:0px 0px 0px 10px;
+    border-left: 3px solid #555;
+}
+
+.nn-history-list .item{
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.nn-history-list .item .note-date::before{
+    content: " ";
+    position: absolute;
+    top: 0px;
+    width: 15px;
+    height: 15px;
+    background-color: #116ebe;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    left: -19px;
+}
+.nn-history-list .item .note-content .content{
+    padding: 6px 12px 8px 16px;
+    background: #1584cd;
+    color: white;
+    border-radius: 0px 13px 16px;
+}

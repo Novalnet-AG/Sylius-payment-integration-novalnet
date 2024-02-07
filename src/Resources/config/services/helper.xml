@@ -1,0 +1,13 @@
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true"/>
+        <service id="sylius_novalnet_payment_plugin.helper.transaction_notes" class="Novalnet\SyliusNovalnetPaymentPlugin\Helper\TransactionNotes">
+            <argument type="service" id="translator"/>
+            <argument type="service" id="sylius.money_formatter" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.helper.lang_code" class="Novalnet\SyliusNovalnetPaymentPlugin\Helper\CustomLangCode">
+            <argument type="service" id="sylius.context.locale"/>
+        </service>
+    </services>
+</container>

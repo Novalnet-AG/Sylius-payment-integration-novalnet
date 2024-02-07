@@ -1,0 +1,6 @@
+suites:
+    main:
+        namespace: Novalnet\SyliusNovalnetPaymentPlugin
+        psr4_prefix: Novalnet\SyliusNovalnetPaymentPlugin
+        spec_path: tests
+        src_path: src

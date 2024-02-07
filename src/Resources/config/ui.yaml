@@ -1,0 +1,4 @@
+imports:
+    - { resource: "ui/payment_details.yaml" }
+    - { resource: "ui/transaction_history.yaml" }
+    - { resource: "ui/stylesheet.yaml" }

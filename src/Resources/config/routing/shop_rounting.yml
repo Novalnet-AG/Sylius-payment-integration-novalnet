@@ -1,0 +1,5 @@
+novalnet_sylius_webhook_notifications:
+    path: /payment/novalnet/{code}/notifications
+    methods: ['POST', 'GET']
+    defaults:
+        _controller: Novalnet\SyliusNovalnetPaymentPlugin\Controller\NotifyController::doAction

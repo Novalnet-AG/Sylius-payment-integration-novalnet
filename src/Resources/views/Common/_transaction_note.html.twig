@@ -1,0 +1,104 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% set onHoldStatus = constant('Novalnet\\SyliusNovalnetPaymentPlugin\\Client\\NovalnetApiClient::STATUS_ON_HOLD') %}
+{% set pendingStatus = constant('Novalnet\\SyliusNovalnetPaymentPlugin\\Client\\NovalnetApiClient::STATUS_PENDING') %}
+<div>
+    {% set payment_type = novalnetTransaction.getPaymentType() | lower %}
+    {% if payment_type in ['googlepay', 'applepay'] and novalnetTransaction.getDetails() is not empty and novalnetTransaction.getDetails().walletCard is defined %}
+        {% set walletCard = novalnetTransaction.getDetails().walletCard %}
+        {% if walletCard.brand is defined and walletCard.lastFour is defined %}
+            {{ 'novalnet_sylius_novalnet_payment_plugin.note.wallet_payment_note' | trans({
+                '%paymentMethod%': ('novalnet_sylius_novalnet_payment_plugin.payment_title.' ~ payment_type ) | trans,
+                '%cardMask%': '(%1$s ****%2$s)' |format(walletCard.brand | title, walletCard.lastFour)
+            }) }}
+            <br>
+        {% endif %}
+    {% endif %}
+    {{ ('novalnet_sylius_novalnet_payment_plugin.payment_title.' ~ payment_type ) | trans }}
+    <br>
+    {{ 'novalnet_sylius_novalnet_payment_plugin.note.novanet_transaction_id' | trans({
+        '%tid%': novalnetTransaction.getTID()
+    }) }}
+    <br>
+    {% if novalnetTransaction.getDetails() is not empty %}
+        {% set additionalData = novalnetTransaction.getDetails() %}
+        {% set formattedAmount = money.format(novalnetTransaction.getAmount(), novalnetTransaction.getCurrency()) %}
+        {% if additionalData.testMode is defined and additionalData.testMode == 1 %}
+            {{ 'novalnet_sylius_novalnet_payment_plugin.note.test_order_text' | trans }}
+            <br>
+        {% endif %}
+
+        {% if novalnetTransaction.getGatewayStatus() == pendingStatus and payment_type in ['guaranteed_invoice', 'guaranteed_direct_debit_sepa', 'instalment_invoice', 'instalment_direct_debit_sepa'] %}
+            {{ 'novalnet_sylius_novalnet_payment_plugin.note.guarantee_verification' | trans }}
+        {% else %}
+            {% if additionalData.bankDetails is defined %}
+                {% set bankDetails = additionalData.bankDetails %}
+
+                <br>
+                {% if additionalData.dueDate is defined and novalnetTransaction.getGatewayStatus() != onHoldStatus %}
+                    {{ 'novalnet_sylius_novalnet_payment_plugin.note.amount_transfer_note_due_date' | trans({
+                        '%amount%': formattedAmount,
+                        '%dueDate%': additionalData.dueDate
+                    }) }}
+                {% else %}
+                    {{ 'novalnet_sylius_novalnet_payment_plugin.note.amount_transfer_note' | trans({
+                        '%amount%': formattedAmount,
+                    }) }}
+                {% endif %}
+                <br>
+                {{ 'novalnet_sylius_novalnet_payment_plugin.note.account_holder' | trans }} {{ bankDetails.account_holder }}
+                <br>
+                {{ 'novalnet_sylius_novalnet_payment_plugin.note.bank_name' | trans }} {{ bankDetails.bank_name }}
+                <br>
+                {{ 'novalnet_sylius_novalnet_payment_plugin.note.bank_place' | trans }} {{ bankDetails.bank_place }}
+                <br>
+                {{ 'novalnet_sylius_novalnet_payment_plugin.note.iban' | trans }} {{ bankDetails.iban }}
+                <br>
+                {{ 'novalnet_sylius_novalnet_payment_plugin.note.bic' | trans }} {{ bankDetails.bic }}
+                <br>
+            {% endif %}
+            {% if additionalData.nearestStores is defined %}
+                <br>
+                {% if additionalData.dueDate is defined %}
+                    {{ 'novalnet_sylius_novalnet_payment_plugin.note.slip_expiry' | trans({
+                        '%dueDate%': additionalData.dueDate
+                    })}}
+                    <br>
+                {% endif %}
+                {{ 'novalnet_sylius_novalnet_payment_plugin.note.nearest_stores' | trans }}
+                <br>
+                {% for store in additionalData.nearestStores %}
+                    <p>{{ store.store_name }},
+                    {{ store.street }},
+                    {{ store.city }},
+                    {{ store.zip }},
+                    {{ store.country_code | sylius_country_name }}</p>
+                {% endfor %}
+            {% endif %}
+            {% if additionalData.paymentReference is defined %}
+                <br>
+                {{ 'novalnet_sylius_novalnet_payment_plugin.note.payment_ref_description' | trans }}
+                <br>
+                {% for reference in additionalData.paymentReference %}
+                    {{ 'novalnet_sylius_novalnet_payment_plugin.note.payment_reference' | trans({
+                        '%count%': loop.index,
+                        '%reference%': reference
+                    }) }}
+                    <br>
+                {% endfor %}
+            {% endif %}
+
+            {% if additionalData.partnerPaymentReference is defined %}
+                <br>
+                {{ 'novalnet_sylius_novalnet_payment_plugin.note.multibanco_ref_description' | trans({
+                    '%amount%': formattedAmount
+                }) }}
+                <br>
+                {{ 'novalnet_sylius_novalnet_payment_plugin.note.payment_reference' | trans({
+                    '%count%': 1,
+                    '%reference%': additionalData.partnerPaymentReference
+                })}}
+                <br>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+</div>

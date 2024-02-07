@@ -1,0 +1,75 @@
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true"/>
+        <service id="sylius_novalnet_payment_plugin.action.convert_payment_action" class="Novalnet\SyliusNovalnetPaymentPlugin\Action\ConvertPaymentAction">
+            <argument type="service" id="sylius_novalnet_payment_plugin.helper.lang_code"/>
+            <tag name="payum.action" factory="novalnet_payment" alias="novalnet.action.convert_payment" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.action.capture_action" class="Novalnet\SyliusNovalnetPaymentPlugin\Action\CaptureAction">
+            <argument type="service" id="router"/>
+            <tag name="payum.action" factory="novalnet_payment" alias="novalnet.action.capture" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.action.authorize_action" class="Novalnet\SyliusNovalnetPaymentPlugin\Action\AuthorizeAction">
+            <argument type="service" id="router"/>
+            <tag name="payum.action" factory="novalnet_payment" alias="novalnet.action.authorize" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.action.notify_action" class="Novalnet\SyliusNovalnetPaymentPlugin\Action\NotifyAction">
+            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius.money_formatter" />
+            <argument type="service" id="translator"/>
+            <argument type="service" id="sylius.repository.payment"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.transaction.novalnet_transactions_action"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.transaction.novalnet_transaction_history_action"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.helper.transaction_notes"/>
+            <argument type="service" id="novalnet.sylius_novalnet_payment_plugin.sender.payment_details_email_sender"/>
+            <tag name="payum.action" factory="novalnet_payment" alias="novalnet.action.notify" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.action.status_action" class="Novalnet\SyliusNovalnetPaymentPlugin\Action\StatusAction">
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="novalnet.sylius_novalnet_payment_plugin.sender.payment_details_email_sender"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.transaction.novalnet_transaction_history_action"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.transaction.novalnet_transactions_action"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.helper.transaction_notes"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.helper.lang_code"/>
+            <tag name="payum.action" factory="novalnet_payment" alias="novalnet.action.status" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.action.create_payment_link_action" class="Novalnet\SyliusNovalnetPaymentPlugin\Action\Api\CreatePaymentLinkAction">
+            <argument type="service" id="request_stack"/>
+            <tag name="payum.action" factory="novalnet_payment" alias="novalnet.action.create_payment_link" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.action.transaction_refund_action" class="Novalnet\SyliusNovalnetPaymentPlugin\Action\Api\TransactionRefundAction">
+            <argument type="service" id="sylius_novalnet_payment_plugin.transaction.novalnet_transactions_action"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.transaction.novalnet_transaction_history_action"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.helper.transaction_notes"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.helper.lang_code"/>
+            <tag name="payum.action" factory="novalnet_payment" alias="novalnet.action.transaction_refund" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.action.capture_transaction" class="Novalnet\SyliusNovalnetPaymentPlugin\Action\Api\CaptureTransactionAction">
+            <argument type="service" id="sylius_novalnet_payment_plugin.transaction.novalnet_transactions_action"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.transaction.novalnet_transaction_history_action"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.helper.transaction_notes"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.helper.lang_code"/>
+            <tag name="payum.action" factory="novalnet_payment" alias="novalnet.action.capture_transaction" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.action.cancel_transaction" class="Novalnet\SyliusNovalnetPaymentPlugin\Action\Api\CancelTransactionAction">
+            <argument type="service" id="sylius_novalnet_payment_plugin.transaction.novalnet_transactions_action"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.transaction.novalnet_transaction_history_action"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.helper.transaction_notes"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.helper.lang_code"/>
+            <tag name="payum.action" factory="novalnet_payment" alias="novalnet.action.cancel_transaction" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.transaction.novalnet_transaction_history_action" class="Novalnet\SyliusNovalnetPaymentPlugin\Transaction\NovalnetTransactionHistoryAction">
+            <argument type="service" id="sylius_novalnet_payment_plugin.factory.novalnet_transaction_history_factory"/>
+            <argument type="service" id="sylius_novalnet_payment.repository.novalnet_transaction_history"/>
+        </service>
+        <service id="sylius_novalnet_payment_plugin.transaction.novalnet_transactions_action" class="Novalnet\SyliusNovalnetPaymentPlugin\Transaction\NovalnetTransactionsAction">
+            <argument type="service" id="sylius_novalnet_payment.factory.novalnet_transactions"/>
+            <argument type="service" id="sylius_novalnet_payment.repository.novalnet_transactions"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="sylius_novalnet_payment_plugin.action.resolve_next_route" class="Novalnet\SyliusNovalnetPaymentPlugin\Action\ResolveNextRouteAction">
+            <tag name="payum.action" factory="novalnet_payment" alias="novalnet.action.resolve_next_route" />
+        </service>
+    </services>
+</container>

@@ -1,0 +1,8 @@
+winzou_state_machine:
+    sylius_payment:
+        callbacks:
+            before:
+                sylius_novalnet_payment_plugin_refund_process:
+                    on: ["complete", "refund", "cancel"]
+                    do: ["@sylius_novalnet_payment_plugin.extension_process.transaction_extensions", "process"]
+                    args: ["object", "event"]

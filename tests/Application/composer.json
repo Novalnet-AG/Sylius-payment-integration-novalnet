@@ -1,0 +1,13 @@
+{
+    "name": "sylius/plugin-skeleton-test-application",
+    "description": "Sylius application for plugin testing purposes (composer.json needed for project dir resolving)",
+    "license": "MIT",
+    "require": {
+        "sylius/invoicing-plugin": "^0.24.0",
+        "sylius/refund-plugin": "^1.4"
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.51",
+        "zenstruck/foundry": "^1.36"
+    }
+}

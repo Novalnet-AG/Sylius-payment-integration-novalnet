@@ -1,0 +1,5 @@
+imports:
+    - { resource: "@NovalnetSyliusNovalnetPaymentPlugin/Resources/config/resources.yaml" }
+    - { resource: "@NovalnetSyliusNovalnetPaymentPlugin/Resources/config/email.yaml" }
+    - { resource: "@NovalnetSyliusNovalnetPaymentPlugin/Resources/config/ui.yaml" }
+    - { resource: "@NovalnetSyliusNovalnetPaymentPlugin/Resources/config/state_machine.yaml" }

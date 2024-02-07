@@ -1,0 +1,25 @@
+{% extends '@SyliusCore/Email/layout.html.twig' %}
+
+{% block subject %}
+    {{ 'novalnet_sylius_novalnet_payment_plugin.email.payment_confirmation_subject'|trans({
+        '%orderNumber%': order.number,
+    }, null, localeCode)|raw }}
+{% endblock %}
+
+{% block content %}
+    {% autoescape false %}
+        <div>
+            {{ 'novalnet_sylius_novalnet_payment_plugin.email.payment_confirmation_content'|trans({
+                '%orderNumber%': order.number,
+            }, null, localeCode) }}
+        </div>
+        <br>
+        <div>
+            {{ 'novalnet_sylius_novalnet_payment_plugin.email.payment_note'|trans({}, null, localeCode) }}:<br>
+            {% include '@NovalnetSyliusNovalnetPaymentPlugin/Common/_transaction_note.html.twig' %}
+        </div>
+    {% endautoescape %}
+{% endblock %}
+
+
+

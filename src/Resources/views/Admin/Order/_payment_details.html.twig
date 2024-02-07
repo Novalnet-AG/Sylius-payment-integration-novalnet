@@ -1,0 +1,9 @@
+{% if novalnetTransaction|default(null) %}
+    <h4 class="ui dividing header">Novalnet Transaction Note</h4>
+    <div class="ui relaxed divided list" id="novalnet-payment-details">
+        <div class="column">
+            {% include '@NovalnetSyliusNovalnetPaymentPlugin/Common/_transaction_note.html.twig' %}
+        </div>
+        <div class="column"></div>
+    </div>
+{% endif %}

@@ -1,0 +1,2 @@
+novalnet_sylius_plugin:
+    resource: "@NovalnetSyliusNovalnetPaymentPlugin/Resources/config/routing.yaml"

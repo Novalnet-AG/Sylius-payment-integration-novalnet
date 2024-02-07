@@ -1,0 +1,5 @@
+sylius_mailer:
+  emails:
+    payment_details:
+      subject: "Payment Details Mail"
+      template: "@NovalnetSyliusNovalnetPaymentPlugin/Shop/Email/_payment_details.html.twig"

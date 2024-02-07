@@ -1,0 +1,12 @@
+sylius_ui:
+    events:
+        sylius.admin.layout.stylesheets:
+            blocks:
+                novalnet_stylesheet:
+                    template: "@NovalnetSyliusNovalnetPaymentPlugin/Common/_stylesheet.html.twig"
+                    priority: 31
+        sylius.shop.layout.stylesheets:
+            blocks:
+                novalnet_stylesheet:
+                    template: "@NovalnetSyliusNovalnetPaymentPlugin/Common/_stylesheet.html.twig"
+                    priority: 31

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius_novalnet_payment_plugin.extension_process.transaction_extensions" class="Novalnet\SyliusNovalnetPaymentPlugin\StateMachine\ExtensionProcessor" public="true">
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="payum"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.context.admin.admin_user_context"/>
+        </service>
+    </services>
+</container>

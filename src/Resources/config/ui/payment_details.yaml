@@ -1,0 +1,12 @@
+sylius_ui:
+    events:
+        sylius.shop.account.order.show.subcontent:
+            blocks:
+                payment_details:
+                    template: "@NovalnetSyliusNovalnetPaymentPlugin/Shop/Order/_payment_details.html.twig"
+                    priority: 9
+        sylius.admin.order.show.payments_content:
+            blocks:
+                payment_details:
+                    template: "@NovalnetSyliusNovalnetPaymentPlugin/Admin/Order/_payment_details.html.twig"
+                    priority: 9

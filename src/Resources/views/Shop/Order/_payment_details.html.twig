@@ -1,0 +1,7 @@
+{% if novalnetTransaction|default(null) %}
+    <div class="ui segment">
+        <div class="column">
+            {% include '@NovalnetSyliusNovalnetPaymentPlugin/Common/_transaction_note.html.twig' %}
+        </div>
+    </div>
+{% endif %}

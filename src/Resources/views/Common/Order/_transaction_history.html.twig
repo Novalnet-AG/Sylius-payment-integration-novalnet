@@ -1,0 +1,19 @@
+{% if novalnetTxnHistory|default(null) %}
+    <div class="ui segment">
+        <h3 class="ui dividing header">Novalnet Transaction History</h3>
+        <div>
+            <ul class="nn-history-list">
+                {% for history in novalnetTxnHistory %}
+                    <li class="item">
+                        <div class="note-date">
+                            {{ history.date|date('F d Y H:i:s') }}
+                        </div>
+                        <div class="note-content">
+                            <p class="content">{{history.note | nl2br}}</p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

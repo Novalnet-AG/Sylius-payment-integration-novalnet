@@ -1,0 +1,7 @@
+sylius_resource:
+    resources:
+        sylius_novalnet_payment.novalnet_transaction_history:
+            driver: doctrine/orm
+            classes:
+                model: Novalnet\SyliusNovalnetPaymentPlugin\Entity\NovalnetTransactionHistory
+                repository: Novalnet\SyliusNovalnetPaymentPlugin\Repository\NovalnetTransactionHistoryRepository

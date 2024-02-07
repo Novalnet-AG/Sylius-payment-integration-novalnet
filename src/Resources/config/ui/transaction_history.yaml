@@ -1,0 +1,12 @@
+sylius_ui:
+    events:
+        sylius.admin.order.show.sidebar:
+            blocks:
+                transaction_history:
+                    template: "@NovalnetSyliusNovalnetPaymentPlugin/Common/Order/_transaction_history.html.twig"
+                    priority: 31
+        sylius.shop.account.order.show.subcontent:
+            blocks:
+                transaction_history:
+                    template: "@NovalnetSyliusNovalnetPaymentPlugin/Common/Order/_transaction_history.html.twig"
+                    priority: 9

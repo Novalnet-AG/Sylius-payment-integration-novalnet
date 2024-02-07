@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+        <service id="app.novalnet_payment" class="Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder">
+            <argument>Novalnet\SyliusNovalnetPaymentPlugin\Factory\NovalnetPaymentGatewayFactory</argument>
+            <tag name="payum.gateway_factory_builder" factory="novalnet_payment" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.factory.novalnet_transaction_history_factory"
+                 class="Novalnet\SyliusNovalnetPaymentPlugin\Factory\NovalnetTransactionHistoryFactory"
+                 decorates="sylius_novalnet_payment.factory.novalnet_transaction_history">
+            <argument type="service" id="sylius_novalnet_payment_plugin.factory.novalnet_transaction_history_factory.inner"/>
+        </service>
+        <service id="sylius_novalnet_payment_plugin.factory.novalnet_transactions_factory"
+                 class="Novalnet\SyliusNovalnetPaymentPlugin\Factory\NovalnetTransactionsFactory"
+                 decorates="sylius_novalnet_payment.factory.novalnet_transactions">
+            <argument type="service" id="sylius_novalnet_payment_plugin.factory.novalnet_transactions_factory.inner"/>
+        </service>
+    </services>
+</container>

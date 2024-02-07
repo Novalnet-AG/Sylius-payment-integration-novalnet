@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Novalnet\SyliusNovalnetPaymentPlugin\Form\Type\NovalnetGatewayConfigurationType">
+            <argument type="service" id="sylius_novalnet_payment_plugin.helper.lang_code"/>
+            <tag name="sylius.gateway_configuration_type" type="novalnet_payment" label="Novalnet Payment" />
+            <tag name="form.type" />
+        </service>
+    </services>
+</container>

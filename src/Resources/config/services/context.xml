@@ -1,0 +1,18 @@
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true"/>
+        <service id="sylius_novalnet_payment_plugin.context_provider.payment_details_context_provider" class="Novalnet\SyliusNovalnetPaymentPlugin\ContextProvider\PaymentDetailsContextProvider">
+            <argument type="service" id="sylius_novalnet_payment.repository.novalnet_transactions"/>
+            <tag name="sylius.ui.template_event.context_provider" factory="novalnet_payment" alias="sylius.ui.template_event.context_provider.payment_details" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.context_provider.transaction_history_context_provider" class="Novalnet\SyliusNovalnetPaymentPlugin\ContextProvider\TransactionHistoryContextProvider">
+            <argument type="service" id="sylius_novalnet_payment.repository.novalnet_transaction_history"/>
+            <argument type="service" id="sylius_novalnet_payment_plugin.context.admin.admin_user_context"/>
+            <tag name="sylius.ui.template_event.context_provider" factory="novalnet_payment" alias="sylius.ui.template_event.context_provider.transaction_history" />
+        </service>
+        <service id="sylius_novalnet_payment_plugin.context.admin.admin_user_context" class="Novalnet\SyliusNovalnetPaymentPlugin\Context\Admin\AdminUserContext">
+            <argument type="service" id="security.token_storage"/>
+        </service>
+    </services>
+</container>
