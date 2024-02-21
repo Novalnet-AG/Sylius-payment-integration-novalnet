@@ -1,6 +1,6 @@
-# Novalnet payment module for Sylius
+# Novalnet payment plugin for Sylius
 
-Novalnet payment module for Sylius simplifies your daily work by automating the entire payment process, from checkout till collection. The Sylius payment module is designed to help you increase your sales by offering various international and local payment methods.
+Novalnet payment plugin for Sylius simplifies your daily work by automating the entire payment process, from checkout till collection. The Sylius payment plugin is designed to help you increase your sales by offering various international and local payment methods.
 
 ## Why Sylius with Novalnet? 
 
