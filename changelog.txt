@@ -1,0 +1,4 @@
+*** Changelog ***
+
+= 1.0.0 - 2024.03.26 =
+* New release - Payment plugin built with seamless payment experience with enhanced features with better usability
