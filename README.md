@@ -55,6 +55,46 @@ Sylius aim to shape the future of eCommerce, leveraging the strength of open sou
 - Blik
 - Payconiq
 
+## Installation via Composer
+
+#### Follow the below steps and run each command from the shop root directory
+ ##### 1. Run the below command to install the payment module
+ ```
+ composer require novalnet/sylius-novalnet-payment-plugin --no-scripts
+ ```
+##### 2. When using Symfony flex the proper bundle class will be automatically registered in your bundles.php file. If you're not using Symfony Flex, you'll need to manually add the bundle class to your `config/bundles.php` file
+ ```
+ return [
+// ...
+Novalnet\SyliusNovalnetPaymentPlugin\NovalnetSyliusNovalnetPaymentPlugin::class => ['all' => true],
+];
+ ```
+##### 3. Import required configuration settings into your `config/packages/_sylius.yaml` file:
+ ```
+ # config/packages/_sylius.yaml
+imports:
+...
+- { resource: "@NovalnetSyliusNovalnetPaymentPlugin/Resources/config/config.yaml" }
+ ```
+##### 4. To import routing configuration into your `config/routes.yaml` file:
+ ```
+ # config/routes.yaml
+novalnet_sylius_plugin:
+resource: "@NovalnetSyliusNovalnetPaymentPlugin/Resources/config/routing.yaml"
+ ```
+##### 5. Install assets
+ ```
+bin/console assets:install
+ ```
+##### 6. Clear cache
+ ```
+bin/console cache:clear
+ ```
+##### 7. To execute migrations
+ ```
+bin/console doctrine:migrations:migrate
+ ```
+
 ## Documentation & Support
 For more information about the integration, please get in touch with us at sales@novalnet.de or +49 89 9230683-20 or by contacting us <a href="https://www.novalnet.de/kontakt/sales"> here.</a>
 
